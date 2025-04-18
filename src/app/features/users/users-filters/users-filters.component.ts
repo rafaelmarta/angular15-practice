@@ -7,7 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class UsersFiltersComponent {
   @Input() searchText = '';
-
   @Output() searchTextChange = new EventEmitter<string>();
   @Output() addUser = new EventEmitter<void>();
+  selectedStatus = 'all'
+  
 }
