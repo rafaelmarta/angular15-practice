@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 import { IUser } from 'src/app/shared/user/user.model';
 import { generateMockUsers } from 'src/app/shared/user/users.mock';
+import { UsersModalComponent } from '../users-modal/users-modal.component';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-users-page',
@@ -13,12 +16,27 @@ export class UsersPageComponent implements OnInit {
   companyOptions = [];
   languageOptions = [];
 
+  constructor(
+    private dialogService: NbDialogService,
+    private usersService: UsersService
+  ){}
+
   ngOnInit(): void {
     this.loadUsers();
   }
 
   loadUsers(): void {
-    const newUsers = generateMockUsers(25);
+    const newUsers = generateMockUsers(5);
     this.users = [...this.users, ...newUsers]
+  }
+
+  openUserModal(): void {
+    this.dialogService.open(UsersModalComponent, {
+      context: {},
+      hasScroll: true,
+      closeOnBackdropClick: true,
+    }).onClose.subscribe(result => {
+      if (result) this.usersService.addUser(result)
+    })
   }
 } 

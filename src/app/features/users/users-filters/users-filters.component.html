@@ -8,7 +8,9 @@
         <nb-option value="pending">Pendentes</nb-option>
         <nb-option value="inactive">Inativos</nb-option>
       </nb-select>
-      <button nbButton status="primary"><nb-icon icon="plus-outline"></nb-icon>Primary</button>
+      <button nbButton status="primary" (click)="addUser.emit()">
+        <nb-icon icon="plus-outline"></nb-icon>Novo usuário
+      </button>
     </nb-card-body>
 </nb-card>
 
