@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from 'src/app/shared/user/user.model';
+import { generateMockUsers } from 'src/app/shared/user/users.mock';
 
 @Component({
   selector: 'app-users-page',
@@ -6,18 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent implements OnInit {
-  users = []
+  users: IUser[] = []
   filterText = '';
   companyOptions = [];
   languageOptions = [];
-  currentPage = 1;
-  pageSize = 10;
-
-  constructor() {
-    console.log('test')
-  }
 
   ngOnInit(): void {
-    console.log('iniciou')
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    const newUsers = generateMockUsers(25);
+    this.users = [...this.users, ...newUsers]
   }
 } 

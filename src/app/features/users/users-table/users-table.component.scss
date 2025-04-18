@@ -1,0 +1,368 @@
+// Colors
+$background-dark: #151a30;
+$card-bg: #222b45;
+$primary-color: #3366ff;
+$text-primary: #ffffff;
+$text-secondary: #8f9bb3;
+$border-color: rgba(255, 255, 255, 0.1);
+$header-bg: #1a2138;
+
+// Status
+$active-bg: rgba(0, 214, 143, 0.15);
+$active-text: #00d68f;
+$inactive-bg: rgba(255, 76, 76, 0.15);
+$inactive-text: #ff4c4c;
+$pending-bg: rgba(255, 170, 0, 0.15);
+$pending-text: #ffaa00;
+
+$padding-standard: 14px 16px;
+$padding-header: 16px;
+$border-radius: 8px;
+$avatar-size: 40px;
+$avatar-size-mobile: 32px;
+
+// Breakpoints
+$breakpoint-md: 768px;
+$breakpoint-sm: 576px;
+$breakpoint-xs: 420px;
+
+.table-container {
+  overflow-x: auto;
+  max-height: 70vh;
+  border-radius: $border-radius;
+  background-color: $card-bg;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $background-dark;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 4px;
+  }
+}
+
+.responsive-hide-md {
+  @media (max-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.responsive-hide-sm {
+  @media (max-width: $breakpoint-sm) {
+    display: none !important;
+  }
+}
+
+.responsive-hide-xs {
+  @media (max-width: $breakpoint-xs) {
+    display: none !important;
+  }
+}
+
+.responsive-show-sm {
+  display: none !important;
+  
+  @media (max-width: $breakpoint-sm) {
+    display: flex !important;
+  }
+}
+
+.responsive-show-xs {
+  display: none !important;
+  
+  @media (max-width: $breakpoint-xs) {
+    display: block !important;
+  }
+}
+
+// Table
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  
+  th, td {
+    padding: $padding-standard;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: $header-bg;
+    
+    th {
+      font-weight: 600;
+      color: $text-secondary;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      padding-top: $padding-header;
+      padding-bottom: $padding-header;
+      border-bottom: 2px solid rgba($primary-color, 0.3);
+    }
+  }
+  
+  tbody {
+    tr {
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: rgba($primary-color, 0.05);
+      }
+    }
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    width: 100%;
+    min-width: auto;
+    
+    th, td {
+      padding: 12px 10px;
+    }
+  }
+}
+
+// Mantém coluna 'actions' visível
+.actions-header {
+  @media (max-width: $breakpoint-xs) {
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+  }
+}
+
+.avatar-cell {
+  width: 60px;
+  
+  .avatar {
+    width: $avatar-size;
+    height: $avatar-size;
+    background-color: $primary-color;
+    color: $text-primary;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba($primary-color, 0.3);
+    font-size: 0.9rem;
+    
+    @media (max-width: $breakpoint-sm) {
+      width: $avatar-size-mobile;
+      height: $avatar-size-mobile;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.user-info-cell {
+  min-width: 200px;
+  
+  .user-name {
+    font-weight: bold;
+    color: $text-primary;
+    margin-bottom: 4px;
+  }
+  
+  .user-email {
+    font-size: 0.85rem;
+    color: $text-secondary;
+    margin-bottom: 4px;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    min-width: 150px;
+    
+    .user-name {
+      font-size: 0.9rem;
+    }
+    
+    .user-email {
+      font-size: 0.75rem;
+    }
+  }
+  
+  .mobile-status-container {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+.status-cell {
+  width: 120px;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-block;
+  text-align: center;
+  min-width: 80px;
+  
+  &.active {
+    background-color: $active-bg;
+    color: $active-text;
+  }
+  
+  &.inactive {
+    background-color: $inactive-bg;
+    color: $inactive-text;
+  }
+  
+  &.pending {
+    background-color: $pending-bg;
+    color: $pending-text;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: 4px 8px;
+    min-width: 60px;
+    font-size: 0.7rem;
+  }
+}
+
+.date-cell {
+  color: $text-secondary;
+  font-size: 0.9rem;
+  min-width: 120px;
+}
+
+// Fixa coluna de actions
+.actions-cell {
+  width: 60px;
+  text-align: center;
+  
+  @media (max-width: $breakpoint-xs) {
+    position: sticky;
+    right: 0;
+    background-color: $card-bg;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(to right, rgba($card-bg, 0), $card-bg);
+    }
+  }
+  
+  button {
+    min-width: 36px;
+    padding: 4px;
+    height: 36px;
+    border-radius: 18px;
+    
+    nb-icon {
+      color: $text-secondary;
+    }
+    
+    &:hover nb-icon {
+      color: $primary-color;
+    }
+    
+    @media (max-width: $breakpoint-sm) {
+      min-width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+// Botão de expandir mobile
+.mobile-expand-btn {
+  display: none;
+  align-items: center;
+  background: none;
+  border: none;
+  color: $primary-color;
+  padding: 6px 10px;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: rgba($primary-color, 0.1);
+  }
+  
+  nb-icon {
+    margin-right: 5px;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+}
+
+// Linha expansível
+.expandable-row {
+  display: none;
+  
+  &.expanded {
+    display: table-row;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    &.expanded {
+      display: table-row;
+    }
+  }
+}
+
+.expandable-content {
+  padding: 0 !important;
+  background-color: rgba($background-dark, 0.5);
+}
+
+.expandable-details {
+  padding: 10px 16px 16px 76px;
+  
+  .detail-item {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: baseline;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .detail-label {
+    width: 120px;
+    font-size: 0.8rem;
+    color: $text-secondary;
+    font-weight: 500;
+  }
+  
+  .detail-value {
+    flex: 1;
+    font-size: 0.85rem;
+    color: $text-primary;
+  }
+  
+  @media (max-width: $breakpoint-xs) {
+    padding: 10px 16px 16px 60px;
+    
+    .detail-label {
+      width: 110px;
+    }
+  }
+}
