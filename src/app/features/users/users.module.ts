@@ -5,7 +5,7 @@ import { UsersPageComponent } from './users-page/users-page.component';
 import { UsersFiltersComponent } from './users-filters/users-filters.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { UsersModalComponent } from './users-modal/users-modal.component';
-import { NbLayoutModule, NbCardModule, NbInputModule, NbFormFieldModule, NbOptionModule, NbSelectModule, NbIconModule, NbButtonModule, NbContextMenuModule, NbMenuModule, NbDialogModule, NbRadioModule, NbSpinnerModule } from '@nebular/theme';
+import { NbLayoutModule, NbCardModule, NbInputModule, NbFormFieldModule, NbOptionModule, NbSelectModule, NbIconModule, NbButtonModule, NbContextMenuModule, NbMenuModule, NbDialogModule, NbRadioModule, NbSpinnerModule, NbTooltipModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbDialogModule,
     NbRadioModule,
     ReactiveFormsModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    NbTooltipModule
   ]
 })
 export class UsersModule { }
