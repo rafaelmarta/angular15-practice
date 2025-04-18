@@ -6,7 +6,11 @@
 
   <nb-layout-column>
 
-    <app-users-filters (addUser)="openUserModal()">
+    <app-users-filters 
+      [searchText]="filterText"  
+      (searchTextChange)="onSearchTextChange($event)"
+      (statusChange)="onStatusChange($event)"
+      (addUser)="openUserModal()">
     </app-users-filters>
 
     <app-users-table [users]="users" (actionClick)="handleUserAction($event)" (loadMoreUsers)="loadUsers()"></app-users-table>

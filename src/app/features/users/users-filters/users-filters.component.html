@@ -1,16 +1,40 @@
-<nb-card>
-  <nb-card-body>
-    <input type="text" nbInput placeholder="Pesquisa livre">
-    <nb-select-label>Situação</nb-select-label>
-    <nb-select [(selected)]="selectedStatus" placeholder="Selecionar uma situação">
-        <nb-option value="all">Todos</nb-option>
-        <nb-option value="active">Ativos</nb-option>
-        <nb-option value="pending">Pendentes</nb-option>
-        <nb-option value="inactive">Inativos</nb-option>
-      </nb-select>
-      <button nbButton status="primary" (click)="addUser.emit()">
-        <nb-icon icon="plus-outline"></nb-icon>Novo usuário
+<nb-card class="filters-card">
+  <nb-card-body class="filters-container">
+    <div class="filters-section">
+      <div class="search-filter">
+        <input 
+          type="text" 
+          nbInput 
+          fullWidth
+          placeholder="Pesquisa livre" 
+          [value]="searchText"
+          (input)="onSearchChange($event)"
+          [nbSpinner]="isSearching"
+          nbSpinnerStatus="primary"
+          nbSpinnerSize="small">
+      </div>
+      <div class="status-filter">
+        <nb-select 
+          [(selected)]="selectedStatus" 
+          placeholder="Situação"
+          (selectedChange)="onStatusChange($event)"
+          fullWidth>
+          <nb-option value="all">Todos</nb-option>
+          <nb-option value="active">Ativos</nb-option>
+          <nb-option value="pending">Pendentes</nb-option>
+          <nb-option value="inactive">Inativos</nb-option>
+        </nb-select>
+      </div>
+    </div>
+    <div class="actions-section">
+      <button 
+        nbButton 
+        status="primary" 
+        size="medium"
+        (click)="addUser.emit()">
+        <nb-icon icon="plus-outline"></nb-icon>
+        <span>Novo usuário</span>
       </button>
-    </nb-card-body>
+    </div>
+  </nb-card-body>
 </nb-card>
-
