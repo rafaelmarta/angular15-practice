@@ -12,10 +12,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent implements OnInit, OnDestroy {
+  allUsers: IUser[] = []
   users: IUser[] = []
   filterText = '';
-  companyOptions = [];
-  languageOptions = [];
+  filterStatus = 'all';
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -25,10 +25,11 @@ export class UsersPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.usersService.users$.subscribe(users => {
-      this.users = users;
+      this.allUsers = users;
+      this.applyFilters();
     })
 
-    if (this.users.length === 0) {
+    if (this.allUsers.length === 0) {
       this.loadInitialMockUsers();
     }
   }
@@ -89,5 +90,37 @@ export class UsersPageComponent implements OnInit, OnDestroy {
         default:
             console.log('Ação desconhecida: ', action);
     }
+  }
+
+  onSearchTextChange(text: string): void {
+    this.filterText = text;
+    this.applyFilters();
+  }
+
+  onStatusChange(status: string): void {
+    this.filterStatus = status;
+    this.applyFilters();
+  }
+
+  private applyFilters(): void {
+    let filteredUsers = [...this.allUsers];
+
+    if (this.filterText && this.filterText.trim() !== '') {
+      const searchText = this.filterText.toLowerCase().trim()
+      filteredUsers = filteredUsers.filter(user => {
+        return (
+          user.name?.toLowerCase().includes(searchText) ||
+          user.lastname?.toLowerCase().includes(searchText) ||
+          user.email?.toLowerCase().includes(searchText) ||
+          (`${user.name} ${user.lastname}`).toLowerCase().includes(searchText)
+        )
+      });
+    }
+
+    if (this.filterStatus !== 'all') {
+      filteredUsers = filteredUsers.filter(user => user.status === this.filterStatus)
+    }
+
+    this.users = filteredUsers
   }
 } 
