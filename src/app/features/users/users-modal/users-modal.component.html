@@ -2,9 +2,9 @@
   <nb-card class="user-modal">
     <nb-card-header class="modal-header">
       <div>
-        <h2 class="modal-title">Adicionar usuário</h2>
+        <h2 class="modal-title">{{ user ? 'Editar usuário' : 'Adicionar usuário' }}</h2>
         <p class="modal-subtitle">
-          Aqui você adiciona e configura os usuários que fazem parte da sua equipe
+          Aqui você {{ user ? 'edita' : 'adiciona' }} e configura os usuários que fazem parte da sua equipe
         </p>
       </div>
       <button nbButton ghost class="close-button" (click)="close()">
@@ -27,6 +27,9 @@
                   type="text" 
                   formControlName="name" 
                   placeholder="Insira seu nome"
+                  [nbTooltip]="getErrorMessage('name')"
+                  [nbTooltipDisabled]="!isControlInvalid('name')"
+                  [status]="isControlInvalid('name') ? 'danger' : 'basic'"
                 >
               </div>
             </nb-form-field>
@@ -39,6 +42,9 @@
                 type="text" 
                 formControlName="lastname" 
                 placeholder="Insira seu sobrenome"
+                [nbTooltip]="getErrorMessage('lastname')"
+                [nbTooltipDisabled]="!isControlInvalid('lastname')"
+                [status]="isControlInvalid('lastname') ? 'danger' : 'basic'"
               >
             </nb-form-field>
           </div>
@@ -57,6 +63,10 @@
                   type="tel" 
                   formControlName="phone"
                   placeholder="(00) 00000-0000"
+                  (input)="formatPhoneNumber($event)"
+                  [nbTooltip]="getErrorMessage('phone')"
+                  [nbTooltipDisabled]="!isControlInvalid('phone')"
+                  [status]="isControlInvalid('phone') ? 'danger' : 'basic'"
                 >
               </div>
             </nb-form-field>
@@ -71,6 +81,9 @@
                   type="email" 
                   formControlName="email" 
                   placeholder="seuemail@email.com"
+                  [nbTooltip]="getErrorMessage('email')"
+                  [nbTooltipDisabled]="!isControlInvalid('email')"
+                  [status]="isControlInvalid('email') ? 'danger' : 'basic'"
                 >
               </div>
             </nb-form-field>
@@ -84,7 +97,14 @@
               <label for="accessProfile" class="label">Perfil de acesso</label>
               <div class="input-container">
                 <nb-icon class="input-icon" nbPrefix icon="shield-outline" pack="eva"></nb-icon>
-                <nb-select fullWidth placeholder="Selecionar um perfil" formControlName="accessProfile">
+                <nb-select 
+                  fullWidth 
+                  placeholder="Selecionar um perfil" 
+                  formControlName="accessProfile"
+                  [nbTooltip]="getErrorMessage('accessProfile')"
+                  [nbTooltipDisabled]="!isControlInvalid('accessProfile')"
+                  [status]="isControlInvalid('accessProfile') ? 'danger' : 'basic'"
+                >
                   <nb-option value="admin">Administrador</nb-option>
                   <nb-option value="analyst">Analista</nb-option>
                   <nb-option value="supervisor">Supervisor</nb-option>
@@ -102,6 +122,9 @@
                   multiple 
                   placeholder="Selecionar idiomas" 
                   formControlName="languages"
+                  [nbTooltip]="getErrorMessage('languages')"
+                  [nbTooltipDisabled]="!isControlInvalid('languages')"
+                  [status]="isControlInvalid('languages') ? 'danger' : 'basic'"
                 >
                   <nb-option value="portuguese">Português</nb-option>
                   <nb-option value="english">Inglês</nb-option>
@@ -113,7 +136,13 @@
 
           <div class="form-row contact-preference">
             <label for="preferredContact" class="label">Contato preferencial</label>
-            <nb-radio-group formControlName="preferredContact" class="contact-radio-group">
+            <nb-radio-group 
+              formControlName="preferredContact" 
+              class="contact-radio-group"
+              [nbTooltip]="getErrorMessage('preferredContact')"
+              [nbTooltipDisabled]="!isControlInvalid('preferredContact')"
+              [status]="isControlInvalid('preferredContact') ? 'danger' : 'basic'"
+            >
               <nb-radio value="email">E-mail</nb-radio>
               <nb-radio value="phone">Telefone</nb-radio>
               <nb-radio value="both">Ambos</nb-radio>
@@ -132,6 +161,7 @@
         status="primary" 
         class="submit-button"
         (click)="submitForm()"
+        [disabled]="!userForm.valid"
       >
         <nb-icon icon="paper-plane-outline" pack="eva"></nb-icon>
         Enviar convite
