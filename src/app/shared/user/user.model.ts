@@ -5,5 +5,8 @@ export interface IUser {
   phone: string;
   status: string;
   createdAt: Date;
-  lastAccess: Date;
+  lastAccess?: Date;
+  languages: string[];
+  preferredContact: string;
+  accessProfile: string;
 }

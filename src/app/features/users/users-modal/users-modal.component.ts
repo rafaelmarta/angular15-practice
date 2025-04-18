@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
 import { IUser } from 'src/app/shared/user/user.model';
@@ -9,6 +9,7 @@ import { IUser } from 'src/app/shared/user/user.model';
   styleUrls: ['./users-modal.component.scss']
 })
 export class UsersModalComponent implements OnInit {
+  @Input() user?: IUser;
   @Output() submitUser = new EventEmitter<IUser>();
   
   userForm: FormGroup = this.formBuilder.group({});
@@ -20,12 +21,26 @@ export class UsersModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+
+    if (this.user) {
+      this.userForm.patchValue({
+        name: this.user.name,
+        lastname: this.user.lastname,
+        phone: this.user.phone || '',
+        email: this.user.email,
+        accessProfile: this.user.accessProfile,
+        languages: this.user.languages,
+        preferredContact: this.user.preferredContact,
+      })
+
+      this.userForm.get('email')?.disable();
+    }
   }
   
   initForm(): void {
     this.userForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
       phone: [''],
       email: ['', [Validators.required, Validators.email]],
       accessProfile: ['', [Validators.required]],
@@ -36,6 +51,10 @@ export class UsersModalComponent implements OnInit {
   
   submitForm(): void {
     if (this.userForm.valid) {
+      if (this.user && this.userForm.get('email')?.disabled) {
+        const formValue = this.userForm.getRawValue();
+        this.ref.close(formValue);        
+      }
       this.ref.close(this.userForm.value)
     } else {
       this.markFormGroupTouched(this.userForm);
