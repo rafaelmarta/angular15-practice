@@ -22,12 +22,19 @@ export class UsersService {
   }
 
   addUser(user: IUser) {
+    user.createdAt = new Date();
+    user.status = 'pending';
+    
     const users = [...this.usersSubject.value, user];
     this.storeUsers(users);
     this.usersSubject.next(users);
   }
 
   updateUser(email: string, changes: Partial<IUser>): void {
+    if (!changes.createdAt) {
+      changes.lastAccess = new Date();
+    }
+
     const users = this.usersSubject.value.map(user =>
        user.email === email 
         ? { ...user, ...changes } 

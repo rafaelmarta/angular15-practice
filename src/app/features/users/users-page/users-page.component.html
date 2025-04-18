@@ -9,7 +9,7 @@
     <app-users-filters (addUser)="openUserModal()">
     </app-users-filters>
 
-    <app-users-table [users]="users" (loadMoreUsers)="loadUsers()"></app-users-table>
+    <app-users-table [users]="users" (actionClick)="handleUserAction($event)" (loadMoreUsers)="loadUsers()"></app-users-table>
   </nb-layout-column>
 
   <nb-layout-footer fixed>

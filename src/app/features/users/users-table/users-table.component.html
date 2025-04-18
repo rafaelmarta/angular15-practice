@@ -14,7 +14,7 @@
         <tr>
           <td class="avatar-cell">
             <div class="avatar">
-              {{ user.name.charAt(0).toUpperCase() }}{{ user.lastname.charAt(0).toUpperCase()}}
+              {{ avatarInitials(user) }}
             </div>
           </td>
           <td class="user-info-cell">
@@ -39,7 +39,11 @@
             {{ user.lastAccess | date:'dd/MM/yyyy HH:mm:ss' }}
           </td>
           <td class="actions-cell">
-            <button nbButton ghost [nbContextMenu]="actions" nbContextMenuTag="user.email" size="small" status="primary">
+            <button nbButton ghost 
+              [nbContextMenu]="actions" 
+              [nbContextMenuTag]="getUserMenuTag(user.email)" 
+              size="small" 
+              status="primary">
               <nb-icon icon="more-vertical-outline"></nb-icon>
             </button>
           </td>

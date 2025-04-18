@@ -18,7 +18,7 @@
           <h5 class="section-title">Informações pessoais</h5>
           <div class="form-row">
             <nb-form-field class="form-field">
-              <label class="label">Nome</label>
+              <label for="name" class="label">Nome</label>
               <div class="input-container">
                 <nb-icon class="input-icon" nbPrefix icon="person-outline" pack="eva"></nb-icon>
                 <input 
@@ -32,12 +32,12 @@
             </nb-form-field>
 
             <nb-form-field class="form-field">
-              <label class="label">Sobrenome</label>
+              <label for="lastname" class="label">Sobrenome</label>
               <input 
                 nbInput 
                 fullWidth
                 type="text" 
-                formControlName="lastName" 
+                formControlName="lastname" 
                 placeholder="Insira seu sobrenome"
               >
             </nb-form-field>
@@ -48,7 +48,7 @@
           <h5 class="section-title">Informações de contato</h5>
           <div class="form-row">
             <nb-form-field class="form-field">
-              <label class="label">Telefone <span class="optional-text">- Opcional</span></label>
+              <label for="phone" class="label">Telefone <span class="optional-text">- Opcional</span></label>
               <div class="input-container">
                 <nb-icon class="input-icon" nbPrefix icon="phone-outline" pack="eva"></nb-icon>
                 <input 
@@ -62,7 +62,7 @@
             </nb-form-field>
 
             <nb-form-field class="form-field">
-              <label class="label">E-mail corporativo</label>
+              <label for="email" class="label">E-mail corporativo</label>
               <div class="input-container">
                 <nb-icon class="input-icon" nbPrefix icon="at-outline" pack="eva"></nb-icon>
                 <input 
@@ -81,7 +81,7 @@
           <h5 class="section-title">Perfil e preferências</h5>
           <div class="form-row">
             <nb-form-field class="form-field">
-              <label class="label">Perfil de acesso</label>
+              <label for="accessProfile" class="label">Perfil de acesso</label>
               <div class="input-container">
                 <nb-icon class="input-icon" nbPrefix icon="shield-outline" pack="eva"></nb-icon>
                 <nb-select fullWidth placeholder="Selecionar um perfil" formControlName="accessProfile">
@@ -94,7 +94,7 @@
             </nb-form-field>
 
             <nb-form-field class="form-field">
-              <label class="label">Idiomas</label>
+              <label for="languages" class="label">Idiomas</label>
               <div class="input-container">
                 <nb-icon class="input-icon" nbPrefix icon="globe-outline" pack="eva"></nb-icon>
                 <nb-select 
@@ -112,7 +112,7 @@
           </div>
 
           <div class="form-row contact-preference">
-            <label class="label">Contato preferencial</label>
+            <label for="preferredContact" class="label">Contato preferencial</label>
             <nb-radio-group formControlName="preferredContact" class="contact-radio-group">
               <nb-radio value="email">E-mail</nb-radio>
               <nb-radio value="phone">Telefone</nb-radio>
