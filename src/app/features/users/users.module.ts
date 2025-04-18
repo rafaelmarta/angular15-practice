@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { UsersFiltersComponent } from './users-filters/users-filters.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { UsersModalComponent } from './users-modal/users-modal.component';
-import { NbLayoutModule, NbCardModule, NbInputModule, NbFormFieldModule, NbOptionModule, NbSelectModule, NbIconModule, NbButtonModule, NbContextMenuModule, NbMenuModule } from '@nebular/theme';
+import { NbLayoutModule, NbCardModule, NbInputModule, NbFormFieldModule, NbOptionModule, NbSelectModule, NbIconModule, NbButtonModule, NbContextMenuModule, NbMenuModule, NbDialogModule, NbRadioModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     NbButtonModule,
     InfiniteScrollModule,
     NbContextMenuModule,
-    NbMenuModule
+    NbMenuModule,
+    NbDialogModule,
+    NbRadioModule,
+    ReactiveFormsModule
   ]
 })
 export class UsersModule { }

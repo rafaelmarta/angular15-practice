@@ -1,0 +1,204 @@
+// Colors
+$background-dark: #151a30;
+$card-bg: #222b45;
+$primary-color: #3366ff;
+$text-primary: #ffffff;
+$text-secondary: #8f9bb3;
+$border-color: rgba(255, 255, 255, 0.1);
+$header-bg: #1a2138;
+
+// Status
+$active-bg: rgba(0, 214, 143, 0.15);
+$active-text: #00d68f;
+$inactive-bg: rgba(255, 76, 76, 0.15);
+$inactive-text: #ff4c4c;
+$pending-bg: rgba(255, 170, 0, 0.15);
+$pending-text: #ffaa00;
+
+$padding-standard: 14px 16px;
+$padding-header: 16px;
+$border-radius: 8px;
+$avatar-size: 40px;
+$avatar-size-mobile: 32px;
+
+// Breakpoints
+$breakpoint-md: 768px;
+$breakpoint-sm: 576px;
+$breakpoint-xs: 420px;
+
+.user-modal {
+  width: 800px;
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: $border-radius;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  background-color: $card-bg;
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: $padding-header;
+    border-bottom: 1px solid $border-color;
+    background-color: $header-bg;
+    border-radius: $border-radius $border-radius 0 0;
+    
+    .modal-title {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $text-primary;
+    }
+    
+    .modal-subtitle {
+      margin: 0;
+      color: $text-secondary;
+      font-size: 0.875rem;
+    }
+    
+    .close-button {
+      padding: 0.5rem;
+      min-width: auto;
+      nb-icon {
+        font-size: 1.25rem;
+      }
+    }
+  }
+  
+  .modal-body {
+    padding: $padding-standard;
+    overflow-y: auto;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: $padding-standard;
+    border-top: 1px solid $border-color;
+  }
+  
+  .user-form {
+    .form-section {
+      margin-bottom: 2rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .section-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: $text-primary;
+        border-left: 3px solid $primary-color;
+        padding-left: 0.75rem;
+      }
+    }
+    
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .form-field {
+      flex: 1;
+      min-width: 200px;
+      
+      .label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $text-primary;
+      }
+      
+      .optional-text {
+        font-size: 0.75rem;
+        color: $text-secondary;
+        font-weight: normal;
+      }
+      
+      .input-container {
+        position: relative;
+        
+        .input-icon {
+          position: absolute;
+          left: 0.75rem;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $text-secondary;
+          z-index: 1;
+        }
+        
+        input, nb-select {
+          padding-left: 2.5rem;
+        }
+      }
+    }
+    
+    .contact-preference {
+      .contact-radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+  
+  .submit-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: $primary-color;
+    
+    nb-icon {
+      font-size: 1.125rem;
+    }
+  }
+  
+  .cancel-button {
+    border-color: $border-color;
+  }
+
+  // Adapt to smaller screens
+  @media (max-width: $breakpoint-md) {
+    .form-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .form-field {
+      width: 100%;
+    }
+    
+    .modal-footer {
+      flex-direction: row;
+      
+      button {
+        flex: 1;
+      }
+    }
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    .modal-header {
+      padding: $padding-header / 1.5;
+    }
+    
+    .modal-body {
+      padding: $padding-standard / 1.5;
+    }
+    
+    .modal-footer {
+      padding: $padding-standard / 1.5;
+    }
+  }
+}

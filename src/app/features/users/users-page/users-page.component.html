@@ -6,7 +6,7 @@
 
   <nb-layout-column>
 
-    <app-users-filters>
+    <app-users-filters (addUser)="openUserModal()">
     </app-users-filters>
 
     <app-users-table [users]="users" (loadMoreUsers)="loadUsers()"></app-users-table>
