@@ -9,11 +9,10 @@
     <app-users-filters>
     </app-users-filters>
 
-    <app-users-table></app-users-table>
+    <app-users-table [users]="users" (loadMoreUsers)="loadUsers()"></app-users-table>
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-  <!-- Insert footer here -->
   </nb-layout-footer>
 
 </nb-layout>
