@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule } from '@nebular/theme';
+import { NbDialogModule, NbMenuModule, NbThemeModule } from '@nebular/theme';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { NbThemeModule } from '@nebular/theme';
     SharedModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'dark' }),
+    InfiniteScrollModule,
+    NbMenuModule.forRoot(),
+    NbDialogModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

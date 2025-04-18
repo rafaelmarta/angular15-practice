@@ -1,1 +1,171 @@
-<p>users-modal works!</p>
+<div class="dialog-container">
+  <nb-card class="user-modal">
+    <nb-card-header class="modal-header">
+      <div>
+        <h2 class="modal-title">{{ user ? 'Editar usuário' : 'Adicionar usuário' }}</h2>
+        <p class="modal-subtitle">
+          Aqui você {{ user ? 'edita' : 'adiciona' }} e configura os usuários que fazem parte da sua equipe
+        </p>
+      </div>
+      <button nbButton ghost class="close-button" (click)="close()">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </nb-card-header>
+
+    <nb-card-body class="modal-body">
+      <form [formGroup]="userForm" class="user-form">
+        <div class="form-section">
+          <h5 class="section-title">Informações pessoais</h5>
+          <div class="form-row">
+            <nb-form-field class="form-field">
+              <label for="name" class="label">Nome</label>
+              <div class="input-container">
+                <nb-icon class="input-icon" nbPrefix icon="person-outline" pack="eva"></nb-icon>
+                <input 
+                  nbInput 
+                  fullWidth
+                  type="text" 
+                  formControlName="name" 
+                  placeholder="Insira seu nome"
+                  [nbTooltip]="getErrorMessage('name')"
+                  [nbTooltipDisabled]="!isControlInvalid('name')"
+                  [status]="isControlInvalid('name') ? 'danger' : 'basic'"
+                >
+              </div>
+            </nb-form-field>
+
+            <nb-form-field class="form-field">
+              <label for="lastname" class="label">Sobrenome</label>
+              <input 
+                nbInput 
+                fullWidth
+                type="text" 
+                formControlName="lastname" 
+                placeholder="Insira seu sobrenome"
+                [nbTooltip]="getErrorMessage('lastname')"
+                [nbTooltipDisabled]="!isControlInvalid('lastname')"
+                [status]="isControlInvalid('lastname') ? 'danger' : 'basic'"
+              >
+            </nb-form-field>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h5 class="section-title">Informações de contato</h5>
+          <div class="form-row">
+            <nb-form-field class="form-field">
+              <label for="phone" class="label">Telefone <span class="optional-text">- Opcional</span></label>
+              <div class="input-container">
+                <nb-icon class="input-icon" nbPrefix icon="phone-outline" pack="eva"></nb-icon>
+                <input 
+                  nbInput 
+                  fullWidth
+                  type="tel" 
+                  formControlName="phone"
+                  placeholder="(00) 00000-0000"
+                  (input)="formatPhoneNumber($event)"
+                  [nbTooltip]="getErrorMessage('phone')"
+                  [nbTooltipDisabled]="!isControlInvalid('phone')"
+                  [status]="isControlInvalid('phone') ? 'danger' : 'basic'"
+                >
+              </div>
+            </nb-form-field>
+
+            <nb-form-field class="form-field">
+              <label for="email" class="label">E-mail corporativo</label>
+              <div class="input-container">
+                <nb-icon class="input-icon" nbPrefix icon="at-outline" pack="eva"></nb-icon>
+                <input 
+                  nbInput 
+                  fullWidth
+                  type="email" 
+                  formControlName="email" 
+                  placeholder="seuemail@email.com"
+                  [nbTooltip]="getErrorMessage('email')"
+                  [nbTooltipDisabled]="!isControlInvalid('email')"
+                  [status]="isControlInvalid('email') ? 'danger' : 'basic'"
+                >
+              </div>
+            </nb-form-field>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h5 class="section-title">Perfil e preferências</h5>
+          <div class="form-row">
+            <nb-form-field class="form-field">
+              <label for="accessProfile" class="label">Perfil de acesso</label>
+              <div class="input-container">
+                <nb-icon class="input-icon" nbPrefix icon="shield-outline" pack="eva"></nb-icon>
+                <nb-select 
+                  fullWidth 
+                  placeholder="Selecionar um perfil" 
+                  formControlName="accessProfile"
+                  [nbTooltip]="getErrorMessage('accessProfile')"
+                  [nbTooltipDisabled]="!isControlInvalid('accessProfile')"
+                  [status]="isControlInvalid('accessProfile') ? 'danger' : 'basic'"
+                >
+                  <nb-option value="admin">Administrador</nb-option>
+                  <nb-option value="analyst">Analista</nb-option>
+                  <nb-option value="supervisor">Supervisor</nb-option>
+                  <nb-option value="operator">Operador</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+
+            <nb-form-field class="form-field">
+              <label for="languages" class="label">Idiomas</label>
+              <div class="input-container">
+                <nb-icon class="input-icon" nbPrefix icon="globe-outline" pack="eva"></nb-icon>
+                <nb-select 
+                  fullWidth 
+                  multiple 
+                  placeholder="Selecionar idiomas" 
+                  formControlName="languages"
+                  [nbTooltip]="getErrorMessage('languages')"
+                  [nbTooltipDisabled]="!isControlInvalid('languages')"
+                  [status]="isControlInvalid('languages') ? 'danger' : 'basic'"
+                >
+                  <nb-option value="portuguese">Português</nb-option>
+                  <nb-option value="english">Inglês</nb-option>
+                  <nb-option value="spanish">Espanhol</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+          </div>
+
+          <div class="form-row contact-preference">
+            <label for="preferredContact" class="label">Contato preferencial</label>
+            <nb-radio-group 
+              formControlName="preferredContact" 
+              class="contact-radio-group"
+              [nbTooltip]="getErrorMessage('preferredContact')"
+              [nbTooltipDisabled]="!isControlInvalid('preferredContact')"
+              [status]="isControlInvalid('preferredContact') ? 'danger' : 'basic'"
+            >
+              <nb-radio value="email">E-mail</nb-radio>
+              <nb-radio value="phone">Telefone</nb-radio>
+              <nb-radio value="both">Ambos</nb-radio>
+            </nb-radio-group>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+
+    <nb-card-footer class="modal-footer">
+      <button nbButton outline status="basic" class="cancel-button" (click)="close()">
+        Cancelar
+      </button>
+      <button 
+        nbButton 
+        status="primary" 
+        class="submit-button"
+        (click)="submitForm()"
+        [disabled]="!userForm.valid"
+      >
+        <nb-icon icon="paper-plane-outline" pack="eva"></nb-icon>
+        Enviar convite
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</div>

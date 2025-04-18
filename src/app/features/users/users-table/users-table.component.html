@@ -1,1 +1,75 @@
-<p>users-table works!</p>
+<div class="table-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" [scrollWindow]="false" (scrolled)="onScroll()">
+  <table class="users-table">
+    <thead>
+      <tr>
+        <th colspan="2">Usuário</th>
+        <th class="responsive-hide-sm">Status</th>
+        <th class="responsive-hide-md">Data de criação</th>
+        <th class="responsive-hide-md">Último acesso</th>
+        <th class="actions-header">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of users; let i = index">
+        <tr>
+          <td class="avatar-cell">
+            <div class="avatar">
+              {{ avatarInitials(user) }}
+            </div>
+          </td>
+          <td class="user-info-cell">
+            <div class="user-name">{{ user.name }} {{ user.lastname }}</div>
+            <div class="user-email">{{ user.email }}</div>
+
+            <div class="mobile-status-container responsive-show-xs">
+              <span class="status-badge" [ngClass]="user.status">{{ mapStatusLabel(user.status) }}</span>
+            </div>
+            <button class="mobile-expand-btn" (click)="toggleExpand(i)">
+              <nb-icon [icon]="expandedRows[i] ? 'chevron-up-outline' : 'chevron-down-outline'"></nb-icon>
+              Ver detalhes
+            </button>
+          </td>
+          <td class="status-cell responsive-hide-sm">
+            <span class="status-badge" [ngClass]="user.status">{{ mapStatusLabel(user.status) }}</span>
+          </td>
+          <td class="date-cell responsive-hide-md">
+            {{ user.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}
+          </td>
+          <td class="date-cell responsive-hide-md">
+            {{ user.lastAccess | date:'dd/MM/yyyy HH:mm:ss' }}
+          </td>
+          <td class="actions-cell">
+            <button nbButton ghost 
+              [nbContextMenu]="actions" 
+              [nbContextMenuTag]="getUserMenuTag(user.email)" 
+              size="small" 
+              status="primary">
+              <nb-icon icon="more-vertical-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+        <tr class="expandable-row" [class.expanded]="expandedRows[i]">
+          <td colspan="6" class="expandable-content">
+            <div class="expandable-details">
+
+              <div class="detail-item responsive-show-sm responsive-hide-xs">
+                <div class="detail-label">Status:</div>
+                <div class="detail-value">
+                  <span class="status-badge" [ngClass]="user.status">{{ mapStatusLabel(user.status) }}</span>
+                </div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Data de criação:</div>
+                <div class="detail-value">{{ user.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Último acesso:</div>
+                <div class="detail-value">{{ user.lastAccess | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

@@ -6,14 +6,17 @@
 
   <nb-layout-column>
 
-    <app-users-filters>
+    <app-users-filters 
+      [searchText]="filterText"  
+      (searchTextChange)="onSearchTextChange($event)"
+      (statusChange)="onStatusChange($event)"
+      (addUser)="openUserModal()">
     </app-users-filters>
 
-    <app-users-table></app-users-table>
+    <app-users-table [users]="users" (actionClick)="handleUserAction($event)" (loadMoreUsers)="loadUsers()"></app-users-table>
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-  <!-- Insert footer here -->
   </nb-layout-footer>
 
 </nb-layout>
